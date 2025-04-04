@@ -9,6 +9,14 @@ public class Criteria {
     private int page; //페이지 번호
     private int amount; //데이터 개수
 
+    //검색키워드
+    private String searchName;
+    private String searchContent;
+    private String startDate;     // 시작 날짜
+    private String endDate;       // 종료 날짜
+    private String searchPrice;   // 가격 정렬 방식
+
+
     public Criteria() {
         this(1, 10);
     }
@@ -16,6 +24,9 @@ public class Criteria {
     public Criteria(int page, int amount) {
         this.page = page;
         this.amount = amount;
+
+
+
     }
 
     //리미트함수 첫번쨰 값에 전달될 함수

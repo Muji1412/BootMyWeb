@@ -57,7 +57,7 @@ public class ProductController {
         String prodWriter = "admin";
         List<ProductVO> list = productService.getList(prodWriter, cri);
 
-        int total = productService.getTotal(prodWriter); //total 행 개수 가져옴
+        int total = productService.getTotal(prodWriter, cri); //total 행 개수 가져옴
         PageVO pageVO = new PageVO(cri,total); // 페이지네이션
         model.addAttribute("pageVO", pageVO);
         model.addAttribute("list", list);

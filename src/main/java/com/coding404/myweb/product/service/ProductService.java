@@ -11,5 +11,5 @@ public interface ProductService {
     ProductVO getDetail(String prodId);
     void productUpdate(ProductVO vo);
     int productDelete(ProductVO vo);
-    int getTotal(String prodWriter);
+    int getTotal(String prodWriter, Criteria cri);
 }

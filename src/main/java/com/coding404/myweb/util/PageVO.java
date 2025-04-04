@@ -20,7 +20,7 @@ public class PageVO {
     private int page;       // 사용자가 지금 보고 있는 현재 페이지 번호
     private int amount;     // 한 페이지에 보여줄 게시글 개수 (예: 10개씩)
     private int total;      // 전체 게시글 수 (DB에 저장된 총 게시글 수)
-    private int readlEnd;   // 실제 마지막 페이지 번호 (총 게시글 수로 계산)
+    private int realEnd;   // 실제 마지막 페이지 번호 (총 게시글 수로 계산)
 
     private Criteria cri;   // 페이지 정보가 담긴 객체 (page와 amount 정보가 들어있음)
     private List<Integer> pageList;  // 화면에 표시할 페이지 번호들을 모아둔 리스트
@@ -49,15 +49,15 @@ public class PageVO {
         // 3단계: 실제 데이터에 따른 진짜 마지막 페이지 계산하기
         // 예: 게시글이 53개고 한 페이지당 10개씩 보여주면 → 53/10 = 5.3 → 올림하면 6
         // 즉, 마지막 페이지는 6페이지가 됨
-        this.readlEnd = (int)Math.ceil(this.total/(double)this.amount);
+        this.realEnd = (int)Math.ceil(this.total/(double)this.amount);
 
         // 4단계: 화면에 보여줄 마지막 페이지 번호 조정하기
         // 만약 계산한 화면 마지막 번호가 실제 마지막 페이지보다 크면 실제 값으로 수정
         // 예: 게시글이 53개라서 실제 마지막은 6페이지인데,
         //    화면에 1~10을 보여주는 상황이면 end=10이지만 readlEnd=6이므로
         //    end를 6으로 조정해서 1,2,3,4,5,6만 표시하게 함
-        if (this.end > this.readlEnd) {
-            this.end = this.readlEnd;
+        if (this.end > this.realEnd) {
+            this.end = this.realEnd;
         }
 
         // 5단계: 이전 버튼 필요한지 결정하기
@@ -70,7 +70,7 @@ public class PageVO {
         // 실제 마지막 페이지가 화면에 보이는 마지막 페이지보다 크면 다음 버튼 필요함
         // 예: 실제 마지막이 17인데 화면에는 10까지만 보이면 다음 버튼 필요함 (true)
         // 예: 실제 마지막이 17인데 화면에는 11~17이 보이면 다음 버튼 필요 없음 (false)
-        this.next = this.readlEnd > this.end;
+        this.next = this.realEnd > this.end;
 
         // 7단계: 화면에 표시할 페이지 번호들을 리스트에 저장하기
         // 1) pageList를 먼저 초기화해야 함 (그렇지 않으면 NullPointerException 발생)
