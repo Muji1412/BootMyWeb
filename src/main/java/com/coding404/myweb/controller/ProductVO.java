@@ -26,6 +26,10 @@ public class ProductVO {
     private String prodPurchaseYn;      // 구매여부(Y/N)
     private String prodContent;         // 내용
     private String prodComment;         // 메모
+
+    // n : 1
+    private String categoryNav;
+
 }
 
 

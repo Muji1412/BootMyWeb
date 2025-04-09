@@ -1,5 +1,6 @@
 package com.coding404.myweb.product.service;
 
+import com.coding404.myweb.command.CategoryVO;
 import com.coding404.myweb.controller.ProductVO;
 import com.coding404.myweb.util.Criteria;
 
@@ -12,4 +13,8 @@ public interface ProductService {
     void productUpdate(ProductVO vo);
     int productDelete(ProductVO vo);
     int getTotal(String prodWriter, Criteria cri);
+
+    //카테고리
+    List<CategoryVO> getCategory(); // 1단 셀렉트
+    List<CategoryVO> getCategorySub(CategoryVO vo); // 2,3단 셀렉트
 }

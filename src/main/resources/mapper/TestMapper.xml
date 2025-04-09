@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.coding404.myweb.testcode.TestMapper">
+<!--    <select id="manyToOne" resultType="com.coding404.myweb.command.DemoOrderVO">-->
+<!--        select *-->
+<!--        from DEMO_ORDER AS O-->
+<!--        LEFT JOIN DEMO_MEMBER AS M-->
+<!--        ON O.MID = M.MID;-->
+<!--    </select>-->
+
+    <!--
+    id - 리절트맵의 이름이 들어감
+    타입은 객체타입을 적어줌
+    id 태그 -> 키에 대한 매핑
+    property = 멤버변수명
+    column은 실제컬럼명
+    N : 1 매핑에서는 association
+
+    -->
+    <resultMap id="OrderToMember" type="com.coding404.myweb.command.DemoOrderVO">
+        <id property="oid" column="oid"/>
+        <result property="mid" column="mid"/>
+        <result property="productName" column="product_name"/>
+        <association property="member">
+            <id property="mid" column="mid"/>
+            <result property="name" column="name"/>
+        </association>
+    </resultMap>
+
+
+    <select id="manyToOne" resultMap="OrderToMember">
+        select *
+        from DEMO_ORDER AS O
+        LEFT JOIN DEMO_MEMBER AS M
+        ON O.MID = M.MID;
+    </select>
+
+    <resultMap id="memberToOrder" type="com.coding404.myweb.command.DemoMemberVO">
+        <id property="mid" column="mid"/>
+        <result property="name" column="name"/>
+        <collection property="orderList" ofType="com.coding404.myweb.command.DemoOrderVO">
+            <id property="oid" column="oid"/>
+            <result property="mid" column="mid"/>
+            <result property="productName" column="product_name"/>
+        </collection>
+
+    </resultMap>
+
+    <select id="oneToMany" resultMap="memberToOrder">
+        select *
+        from DEMO_MEMBER as DM
+        left join spring.DEMO_ORDER DO
+        on DM.MID = DO.MID
+        where DM.MID = 1;
+
+    </select>
+    <select id="">
+        select *
+        from PRODUCT
+        where PROD_WRITER = 'admin'
+        and 1 = 1
+        order by PROD_ID desc
+        limit 0, 10;
+    </select>
+</mapper>
