@@ -19,5 +19,5 @@ public interface ProductMapper {
     int getTotal(@Param("prodWriter") String prodWriter,
                  @Param("cri")Criteria cri);
     List<CategoryVO> getCategory();
-    List<CategoryVO> getCategorySub(CategoryVO vo); // 2,3단 셀렉트
+    List<CategoryVO> getCategorySub(CategoryVO vo); // 2,3단 셀렉트`
 }
